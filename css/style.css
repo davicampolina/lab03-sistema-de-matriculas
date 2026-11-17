@@ -42,6 +42,11 @@ body {
   white-space: nowrap;
 }
 
+.abas-rolaveis {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .nav-tabs .nav-link {
   white-space: nowrap;
 }

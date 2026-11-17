@@ -1,0 +1,171 @@
+@startuml classes
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F4F8FC
+  BorderColor #1F4E79
+}
+hide empty members
+
+title Sistema de Matrículas - Diagrama de Classes (v1)
+
+enum Perfil {
+  ALUNO
+  PROFESSOR
+  SECRETARIA
+}
+
+enum TipoMatricula {
+  OBRIGATORIA
+  OPTATIVA
+}
+
+enum StatusMatricula {
+  ATIVA
+  CANCELADA
+}
+
+enum StatusOferta {
+  ABERTA
+  ATIVA
+  CANCELADA
+}
+
+abstract class Usuario {
+  - id: string
+  - nome: string
+  - email: string
+  - perfil: Perfil
+  + {static} login(email: string, senha: string): Usuario
+  + {static} logout(): void
+  + {static} usuarioAtual(): Usuario
+}
+
+class Aluno {
+  - matricula: string
+  - cursoId: number
+  + listarOfertasDisponiveis(semestre: string): Oferta[]
+  + matricular(oferta: Oferta, tipo: TipoMatricula): Matricula
+  + cancelarMatricula(matricula: Matricula): void
+  + listarMatriculas(semestre: string): Matricula[]
+}
+
+class Professor {
+  + listarDisciplinas(semestre: string): Oferta[]
+  + listarAlunosMatriculados(oferta: Oferta): Aluno[]
+}
+
+class Secretaria {
+  + gerarCurriculo(curso: Curso, semestre: string): Curriculo
+  + cadastrarAluno(aluno: Aluno, senha: string): Aluno
+  + cadastrarProfessor(professor: Professor, senha: string): Professor
+  + abrirPeriodoMatricula(semestre: string, inicio: Date, fim: Date): PeriodoMatricula
+  + encerrarPeriodoMatricula(periodo: PeriodoMatricula): void
+}
+
+class Curso {
+  - id: number
+  - nome: string
+  - creditos: number
+  - disciplinas: Disciplina[]
+  + salvar(): void
+  + excluir(): void
+  + {static} listar(): Curso[]
+}
+
+class Disciplina {
+  - id: number
+  - codigo: string
+  - nome: string
+  - creditos: number
+  - valor: number
+  - cursoId: number
+  + salvar(): void
+  + excluir(): void
+  + {static} listarPorCurso(cursoId: number): Disciplina[]
+}
+
+class Curriculo {
+  - id: number
+  - cursoId: number
+  - semestre: string
+  - ofertas: Oferta[]
+  + adicionarOferta(disciplina: Disciplina, professor: Professor): Oferta
+  + salvar(): void
+  + {static} listarPorSemestre(semestre: string): Curriculo[]
+}
+
+class Oferta {
+  + {static} MIN_ALUNOS: number = 3
+  + {static} MAX_ALUNOS: number = 60
+  - id: number
+  - curriculoId: number
+  - disciplina: Disciplina
+  - professor: Professor
+  - status: StatusOferta
+  - totalMatriculados: number
+  + possuiVagas(): boolean
+  + vagasRestantes(): number
+  + verificarAtivacao(): StatusOferta
+  + salvar(): void
+  + excluir(): void
+}
+
+class Matricula {
+  + {static} MAX_OBRIGATORIAS: number = 4
+  + {static} MAX_OPTATIVAS: number = 2
+  - id: number
+  - alunoId: string
+  - oferta: Oferta
+  - tipo: TipoMatricula
+  - status: StatusMatricula
+  - dataMatricula: Date
+  + salvar(): void
+  + cancelar(): void
+}
+
+class PeriodoMatricula {
+  - id: number
+  - semestre: string
+  - dataInicio: Date
+  - dataFim: Date
+  - encerrado: boolean
+  + estaAberto(): boolean
+  + salvar(): void
+  + encerrar(): void
+  + {static} buscarAtual(): PeriodoMatricula
+}
+
+class Cobranca {
+  - id: number
+  - alunoId: string
+  - semestre: string
+  - valorTotal: number
+  - dataNotificacao: Date
+}
+
+class SistemaCobrancas <<serviço externo>> {
+  + {static} notificar(aluno: Aluno, semestre: string): Cobranca
+}
+
+Usuario <|-- Aluno
+Usuario <|-- Professor
+Usuario <|-- Secretaria
+Usuario --> Perfil
+
+Curso "1" o-- "*" Disciplina
+Curso "1" -- "*" Curriculo
+Aluno "*" --> "1" Curso
+Curriculo "1" *-- "*" Oferta
+Oferta "*" --> "1" Disciplina
+Oferta "*" --> "0..1" Professor : leciona
+Oferta --> StatusOferta
+Aluno "1" -- "0..6" Matricula : por semestre
+Matricula "*" --> "1" Oferta
+Matricula --> TipoMatricula
+Matricula --> StatusMatricula
+PeriodoMatricula ..> Curriculo : semestre
+Secretaria ..> PeriodoMatricula
+SistemaCobrancas ..> Cobranca : registra
+Aluno ..> SistemaCobrancas : notifica
+Cobranca "*" --> "1" Aluno
+@enduml

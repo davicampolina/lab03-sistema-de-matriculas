@@ -103,3 +103,13 @@ Critérios de aceitação:
 - Após o encerramento, não é mais possível se matricular ou cancelar matrículas naquele semestre.
 
 ---
+
+## 🧩 Projeto Estrutural
+
+### Diagrama de Classes
+
+<img src="https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/davicampolina/lab03-sistema-de-matriculas/main/docs/diagramas/v1/classes.puml" alt="Diagrama de Classes">
+
+Fonte: [`docs/diagramas/v1/classes.puml`](docs/diagramas/v1/classes.puml)
+
+---

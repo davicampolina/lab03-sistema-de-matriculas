@@ -1,7 +1,6 @@
 # Enunciado do laboratório
 *.pdf
 
-
 # Sistema / IDE
 .DS_Store
 Thumbs.db

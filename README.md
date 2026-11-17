@@ -381,7 +381,8 @@ Por ser um site estático, basta publicar os arquivos da raiz do repositório.
 │   │   ├── v1/                  # 📐 Casos de uso e classes (versão inicial).
 │   │   └── v2/                  # 📐 Casos de uso, classes e arquitetura (corrigidos).
 │   └── img/
-│       └── logo.svg             # 🖼️ Logo do projeto.
+│       ├── logo.svg             # 🖼️ Logo do projeto.
+│       └── telas/               # 📸 Capturas de tela do sistema.
 ├── LICENSE                      # ⚖️ Licença MIT.
 └── README.md                    # 📘 Este documento.
 ```
@@ -392,12 +393,23 @@ Por ser um site estático, basta publicar os arquivos da raiz do repositório.
 
 ### 🌐 Aplicação Web
 
-| Tela | Descrição |
-| :--- | :--- |
-| **Login** (`index.html`) | Entrada com e-mail e senha; redireciona para a área do perfil. |
-| **Área do Aluno** (`aluno.html`) | Situação do período, contadores de obrigatórias (x/4) e optativas (x/2), valor do semestre, minhas matrículas com cancelamento e disciplinas ofertadas com barra de vagas. |
-| **Área do Professor** (`professor.html`) | Filtro por semestre e lista de disciplinas em *accordion*, cada uma com os alunos matriculados. |
-| **Secretaria** (`secretaria.html`) | Abas de Cursos, Disciplinas, Professores, Alunos, Currículos, Períodos e Cobranças. |
+Para melhor visualização, as telas principais estão organizadas lado a lado. Clique em uma imagem para ampliar.
+
+| Tela | Captura de Tela |
+| :---: | :---: |
+| **Login** | **Área do Aluno** |
+| <img src="docs/img/telas/01-login.png" alt="Tela de Login" width="420px"> | <img src="docs/img/telas/07-aluno.png" alt="Área do Aluno" width="420px"> |
+| **Área do Professor** | **Secretaria – Cursos** |
+| <img src="docs/img/telas/08-professor.png" alt="Área do Professor" width="420px"> | <img src="docs/img/telas/02-secretaria-cursos.png" alt="Secretaria - Cursos" width="420px"> |
+| **Secretaria – Alunos** | **Secretaria – Currículos** |
+| <img src="docs/img/telas/03-secretaria-alunos.png" alt="Secretaria - Alunos" width="420px"> | <img src="docs/img/telas/04-secretaria-curriculos.png" alt="Secretaria - Currículos" width="420px"> |
+| **Secretaria – Períodos** | **Secretaria – Cobranças** |
+| <img src="docs/img/telas/05-secretaria-periodos.png" alt="Secretaria - Períodos de Matrícula" width="420px"> | <img src="docs/img/telas/06-secretaria-cobrancas.png" alt="Secretaria - Cobranças" width="420px"> |
+
+- **Login:** entrada com e-mail e senha; redireciona para a área do perfil.
+- **Área do Aluno:** situação do período, contadores de obrigatórias (x/4) e optativas (x/2), valor do semestre, matrículas com cancelamento e disciplinas ofertadas com as vagas restantes.
+- **Área do Professor:** disciplinas do semestre com os alunos matriculados em cada uma.
+- **Secretaria:** cadastros, geração do currículo semestral, períodos de matrícula e notificações enviadas ao sistema de cobranças.
 
 ---
 

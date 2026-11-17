@@ -1,0 +1,58 @@
+:root {
+  --cor-primaria: #1f4e79;
+  --cor-fundo: #f3f6fa;
+}
+
+body {
+  background-color: var(--cor-fundo);
+}
+
+.bg-primary {
+  background-color: var(--cor-primaria) !important;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--cor-primaria);
+  --bs-btn-border-color: var(--cor-primaria);
+  --bs-btn-hover-bg: #173b5c;
+  --bs-btn-hover-border-color: #173b5c;
+  --bs-btn-active-bg: #12304b;
+}
+
+.text-primary {
+  color: var(--cor-primaria) !important;
+}
+
+.pagina-login {
+  background: linear-gradient(135deg, #1f4e79 0%, #3a7cb8 100%);
+}
+
+.card {
+  border-radius: 0.75rem;
+}
+
+.card-resumo {
+  border: 0;
+  border-left: 4px solid var(--cor-primaria);
+}
+
+.table th {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-tabs .nav-link {
+  white-space: nowrap;
+}
+
+.vagas-barra {
+  height: 6px;
+  min-width: 80px;
+}
+
+.tabela-vazia td {
+  text-align: center;
+  color: #6c757d;
+  padding: 1.5rem;
+}

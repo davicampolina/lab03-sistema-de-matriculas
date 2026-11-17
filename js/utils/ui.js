@@ -37,6 +37,17 @@ export function formatarData(data, comHora = true) {
   return new Date(data).toLocaleString('pt-BR', opcoes);
 }
 
+const STATUS_OFERTA = {
+  ABERTA: ['bg-primary', 'Aberta'],
+  ATIVA: ['bg-success', 'Ativa'],
+  CANCELADA: ['bg-danger', 'Cancelada']
+};
+
+export function badgeStatusOferta(status) {
+  const [classe, texto] = STATUS_OFERTA[status] ?? ['bg-secondary', status];
+  return `<span class="badge ${classe}">${texto}</span>`;
+}
+
 export function linhaVazia(colunas, mensagem) {
   return `<tr class="tabela-vazia"><td colspan="${colunas}">${escapar(mensagem)}</td></tr>`;
 }

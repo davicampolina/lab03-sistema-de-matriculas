@@ -1,0 +1,13 @@
+# Enunciado do laboratório
+*.pdf
+
+# Configuração local do Supabase (chaves)
+js/config.local.js
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+node_modules/

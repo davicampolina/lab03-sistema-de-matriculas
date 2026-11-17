@@ -1,5 +1,3 @@
----
-
 # 🎓 Sistema de Matrículas 👨‍💻
 
 > [!NOTE]

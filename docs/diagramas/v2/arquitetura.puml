@@ -1,0 +1,69 @@
+@startuml arquitetura
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+skinparam package {
+  BorderColor #1F4E79
+}
+
+title Sistema de Matrículas - Arquitetura
+
+actor "Aluno / Professor /\nSecretaria" as Usuario
+
+package "Navegador (front-end estático)" {
+  package "Páginas (HTML5 + Bootstrap 5)" as Paginas {
+    [index.html\n(login)] as PIndex
+    [aluno.html] as PAluno
+    [professor.html] as PProfessor
+    [secretaria.html] as PSecretaria
+  }
+
+  package "js/pages (controladores)" as Controladores {
+    [login.js]
+    [aluno.js]
+    [professor.js]
+    [secretaria.js]
+  }
+
+  package "js/models (domínio)" as Modelos {
+    [Usuario / Aluno /\nProfessor / Secretaria] as MUsuarios
+    [Curso / Disciplina /\nCurriculo / Oferta] as MAcademico
+    [Matricula /\nPeriodoMatricula / Cobranca] as MMatricula
+  }
+
+  package "js/services" as Servicos {
+    [AuthService]
+    [SistemaCobrancas]
+  }
+
+  [js/utils/ui.js] as UI
+  [js/supabaseClient.js\n(supabase-js)] as Cliente
+}
+
+cloud "Supabase" {
+  [Supabase Auth] as Auth
+  database "PostgreSQL" {
+    [Tabelas + RLS] as Tabelas
+    [view ofertas_detalhadas] as View
+    [trigger validar_matricula] as Trigger
+    [função registrar_cobranca] as Rpc
+  }
+}
+
+Usuario --> Paginas
+PIndex ..> [login.js]
+PAluno ..> [aluno.js]
+PProfessor ..> [professor.js]
+PSecretaria ..> [secretaria.js]
+
+Controladores --> Modelos
+Controladores --> UI
+Controladores --> Servicos
+Modelos --> Cliente
+Servicos --> Cliente
+
+Cliente --> Auth : login / cadastro
+Cliente --> Tabelas : consultas (REST)
+Cliente --> View
+Cliente --> Rpc : notificação de cobrança
+Trigger --> Tabelas
+@enduml

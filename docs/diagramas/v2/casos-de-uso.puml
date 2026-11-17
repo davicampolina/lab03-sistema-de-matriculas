@@ -1,0 +1,72 @@
+@startuml casos-de-uso
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #F4F8FC
+  BorderColor #1F4E79
+}
+
+title Sistema de Matrículas - Diagrama de Casos de Uso (v2)
+
+actor "Usuário" as Usuario
+actor "Aluno" as Aluno
+actor "Professor" as Professor
+actor "Secretaria" as Secretaria
+actor "Sistema de\nCobranças" as Cobrancas <<sistema>>
+
+Usuario <|-- Aluno
+Usuario <|-- Professor
+Usuario <|-- Secretaria
+
+rectangle "Sistema de Matrículas" {
+  usecase "Efetuar login" as UC01
+  usecase "Efetuar logout" as UC14
+
+  usecase "Consultar disciplinas ofertadas" as UC15
+  usecase "Matricular-se em disciplina\n(obrigatória ou optativa)" as UC02
+  usecase "Cancelar matrícula" as UC03
+  usecase "Consultar minhas matrículas" as UC04
+  usecase "Verificar período de\nmatrículas aberto" as UC16
+  usecase "Notificar sistema\nde cobranças" as UC05
+
+  usecase "Consultar alunos matriculados\npor disciplina" as UC06
+
+  usecase "Manter cursos" as UC08
+  usecase "Manter disciplinas" as UC09
+  usecase "Manter professores" as UC10
+  usecase "Manter alunos" as UC11
+  usecase "Gerar currículo do semestre" as UC07
+  usecase "Ofertar disciplina no currículo" as UC17
+  usecase "Abrir período de matrículas" as UC12
+  usecase "Encerrar período de matrículas" as UC13
+  usecase "Consultar cobranças" as UC18
+}
+
+Usuario --> UC01
+Usuario --> UC14
+
+Aluno --> UC15
+Aluno --> UC02
+Aluno --> UC03
+Aluno --> UC04
+
+Professor --> UC06
+
+Secretaria --> UC08
+Secretaria --> UC09
+Secretaria --> UC10
+Secretaria --> UC11
+Secretaria --> UC07
+Secretaria --> UC12
+Secretaria --> UC13
+Secretaria --> UC18
+
+UC02 ..> UC16 : <<include>>
+UC03 ..> UC16 : <<include>>
+UC02 ..> UC05 : <<include>>
+UC03 ..> UC05 : <<include>>
+UC17 ..> UC07 : <<extend>>
+UC13 ..> UC05 : <<include>>
+UC05 --> Cobrancas
+@enduml

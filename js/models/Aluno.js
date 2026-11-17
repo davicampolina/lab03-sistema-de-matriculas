@@ -8,6 +8,10 @@ export class Aluno extends Usuario {
     this.cursoId = cursoId;
   }
 
+  paginaInicial() {
+    return 'aluno.html';
+  }
+
   async listarOfertasDisponiveis(semestre) {
     // TODO
   }

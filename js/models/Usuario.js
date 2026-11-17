@@ -6,15 +6,7 @@ export class Usuario {
     this.perfil = perfil;
   }
 
-  static async login(email, senha) {
-    // TODO: autenticar no Supabase Auth
-  }
-
-  static async logout() {
-    // TODO
-  }
-
-  static async usuarioAtual() {
-    // TODO: recuperar a sessão e o perfil do usuário logado
+  paginaInicial() {
+    return 'index.html';
   }
 }

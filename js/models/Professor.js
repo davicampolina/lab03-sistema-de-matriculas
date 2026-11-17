@@ -6,6 +6,10 @@ export class Professor extends Usuario {
     super({ ...dados, perfil: Perfil.PROFESSOR });
   }
 
+  paginaInicial() {
+    return 'professor.html';
+  }
+
   async listarDisciplinas(semestre) {
     // TODO
   }

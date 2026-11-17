@@ -6,6 +6,10 @@ export class Secretaria extends Usuario {
     super({ ...dados, perfil: Perfil.SECRETARIA });
   }
 
+  paginaInicial() {
+    return 'secretaria.html';
+  }
+
   async gerarCurriculo(curso, semestre) {
     // TODO
   }
